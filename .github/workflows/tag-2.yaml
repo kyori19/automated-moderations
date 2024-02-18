@@ -1,4 +1,4 @@
-name: Tag and Mention
+name: Tag 2
 
 on:
   push:
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: node tag-and-mention.mjs 診断メーカー
+      - run: node tag-and-mention.mjs スパムを一括で消せるタグ
         env:
           MASTODON_HOST: ${{ secrets.MASTODON_HOST }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
