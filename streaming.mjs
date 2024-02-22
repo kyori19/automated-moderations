@@ -24,7 +24,7 @@ const streaming = createStreamingAPIClient({
 
 for await (const msg of streaming.public.remote.subscribe()) {
     if (msg.event !== 'update') {
-        break;
+        continue;
     }
 
     const { account, mentions } = msg.payload;
