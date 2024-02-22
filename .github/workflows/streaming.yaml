@@ -1,4 +1,4 @@
-name: Mention
+name: Streaming
 
 on:
   push:
@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: node media-and-mention.mjs
+      - run: npm ci
+      - run: node streaming.mjs
         env:
           MASTODON_HOST: ${{ secrets.MASTODON_HOST }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
