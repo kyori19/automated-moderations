@@ -24,11 +24,11 @@ const streaming = createStreamingAPIClient({
 
 for await (const msg of streaming.public.remote.subscribe()) {
     if (msg.event !== 'update') {
-        break;
+        continue;
     }
 
     const { account, mentions } = msg.payload;
-    if (account.username.length === 10 && mentions.length > 3) {
+    if (account.username.length === 10 && mentions.length > 5) {
         console.log(`Found @${account.acct}`);
         await rest.v1.admin.accounts.$select(account.id).action.create({ type: 'suspend' });
     }
