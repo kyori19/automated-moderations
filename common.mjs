@@ -41,5 +41,5 @@ const exec = (accounts) => async () => {
 export default async (accounts) => {
     const fn = exec(accounts);
     await fn();
-    setInterval(fn, 10 * 1000);
+    setInterval(fn, 3 * 1000);
 };

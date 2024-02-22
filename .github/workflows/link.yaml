@@ -1,0 +1,14 @@
+name: Mention
+
+on:
+  push:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: node link-and-mention.mjs
+        env:
+          MASTODON_HOST: ${{ secrets.MASTODON_HOST }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
