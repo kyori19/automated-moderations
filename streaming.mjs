@@ -27,8 +27,8 @@ for await (const msg of streaming.public.remote.subscribe()) {
         continue;
     }
 
-    const { account, mentions } = msg.payload;
-    if (account.username.length === 10 && mentions.length > 5) {
+    const { account, mentions, mediaAttachments } = msg.payload;
+    if (account.username.length === 10 && mentions.length >= 5 && mediaAttachments.length > 0) {
         console.log(`Found @${account.acct}`);
         await rest.v1.admin.accounts.$select(account.id).action.create({ type: 'suspend' });
     }
