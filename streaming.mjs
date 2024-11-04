@@ -40,6 +40,7 @@ for await (const msg of streaming.public.remote.subscribe()) {
     }
 
     if (likely(msg.payload)) {
+        const account = msg.payload.account;
         console.log(`Found @${account.acct}`);
         await rest.v1.admin.accounts.$select(account.id).action.create({ type: 'suspend' });
     }
