@@ -22,13 +22,24 @@ const streaming = createStreamingAPIClient({
     accessToken,
 });
 
+const likely = ({ account, mentions, mediaAttachments }) => {
+    if (account.username.length !== 10 || mentions.length === 0) {
+        return false;
+    }
+
+    if (mentions.length > 5) {
+        return true;
+    }
+
+    return mentions.length > 3 && mediaAttachments.length > 0;
+}
+
 for await (const msg of streaming.public.remote.subscribe()) {
     if (msg.event !== 'update') {
         continue;
     }
 
-    const { account, mentions, mediaAttachments } = msg.payload;
-    if (account.username.length === 10 && mentions.length >= 5 && mediaAttachments.length > 0) {
+    if (likely(msg.payload)) {
         console.log(`Found @${account.acct}`);
         await rest.v1.admin.accounts.$select(account.id).action.create({ type: 'suspend' });
     }
